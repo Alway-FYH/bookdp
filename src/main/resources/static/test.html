@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>支付</title>
+    <link rel="shortcut icon" href="#">
+    <th:block th:include="common.html :: source"></th:block>
+    <script type="text/javascript" src="/js/productDetail.js"></script>
+</head>
+<body>
+
+<th:block th:include="common.html :: header"></th:block>
+<th:block th:include="common.html :: category"></th:block>
+
+        <div class="l_list">
+            <div class="list_c">
+                <ul class="cate_list">
+                    <img  th:src="'/images/userBuy'+${orders.id}+'.png'">
+                    <form action="/orders/money" method="post">
+                        <input type="hidden" th:value="${orders.id}" name="ordersId">
+                        <h2>支付密码：</h2><input type="text" name="payCode" required><br>
+                        <input type="submit" value="提交支付">
+                    </form>
+                </ul>
+            </div>
+        </div>
+
+
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: permit"></th:block>
+</body>
+</html>

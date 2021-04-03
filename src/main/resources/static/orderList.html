@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单中心</title>
+    <link rel="shortcut icon" href="#">
+    <th:block th:include="common.html :: source"></th:block>
+</head>
+<body>
+
+<th:block th:include="common.html :: header"></th:block>
+
+<div class="i_bg bg_color">
+    <div class="m_content">
+
+        <div class="m_left">
+            <div class="left_n">管理中心</div>
+            <div class="left_m">
+                <div class="left_m_t t_bg1">订单中心</div>
+                <ul>
+                    <li><a href="#" >我的订单</a></li>
+                </ul>
+            </div>
+            <div class="left_m">
+                <div class="left_m_t t_bg2">会员中心</div>
+                <ul>
+                    <li><a href="/user/userInfo" >用户信息</a></li>
+                    <li><a href="/userAddress/list"  >地址管理</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="m_right" id="content">
+            <p></p>
+            <p></p>
+            <div class="mem_tit" >订单列表</div>
+            <table border="0" class="order_tab"
+                   style="width: 930px; text-align: center; margin-bottom: 30px;"
+                   cellspacing="0" cellpadding="0" th:each="list:${list}">
+                <tbody>
+                <div>
+                    <tr class="td_bg">
+                        <td th:text="'收货人名称：'+${list.loginName}"></td>
+                        <td th:text="'订单编号：'+${list.serialnumber}"></td>
+                        <td th:text="'收获地址：'+${list.userAddress}"></td>
+                        <td th:text="'总价：￥'+${list.cost}"></td>
+                    </tr>
+                        <td colspan="4">
+                            <table border="0" class="order_tab"
+                                   style="width: 930px; text-align: center; margin-bottom: 30px;"
+                                   cellspacing="0" cellpadding="0" th:each="show:${list.productListVOS}">
+                                <tbody>
+                                <tr>
+                                    <td width="15%" >商品名称</td>
+                                    <td width="20%" >商品图片</td>
+                                    <td width="10%" >数量</td>
+                                    <td width="10%" >单价</td>
+                                    <td width="15%" >总价</td>
+                                    <td width="20%" >发货状态</td>
+                                    <td width="25%" >支付状态</td>
+                                </tr>
+
+                                <tr>
+                                    <td th:text="${show.name}">商品</td>
+                                    <td>
+                                        <img th:src="'/images/'+${show.fileName}" width="50"
+                                             height="50">
+                                    </td>
+                                    <td th:text="${show.quantity}">1</td>
+                                    <td th:text="${show.cost}/${show.quantity}">6000</td>
+                                    <td th:text="'￥'+${show.cost}">10000</td>
+                                    <td th:if="${list.state} == 0" ><h2>未发货</h2></td>
+                                    <td th:if="${list.state} == 1" ><h2>未发货</h2></td>
+                                    <td th:if="${list.pay} == 0" ><a th:href="'/orders/pay/'+${list.id}"><h2>重新支付</h2></a></td>
+                                    <td th:if="${list.pay} == 1" ><h2>已支付</h2></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: permit"></th:block>
+
+</body>
+</html>

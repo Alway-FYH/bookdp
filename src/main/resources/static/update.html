@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <link rel="shortcut icon" href="#">
+    <th:block th:include="layCommon.html :: source"></th:block>
+</head>
+<body>
+<th:block th:include="layCommon.html :: heard"></th:block>
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 80px;">
+        <h1 align="center">修改书籍信息</h1>
+        <form  action="/all/updateOne"  method="post" enctype="multipart/form-data">
+            <table border="1" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>原图片： &nbsp;</td>
+                    <td><img th:src="'/images/'+${updateProduct.fileName}" width="50" height="50"></td>
+                </tr>
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>选择新图片： &nbsp;</td>
+                    <td><input type="file"  name="img" /></td>
+                </tr>
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>填写新名称： &nbsp;</td>
+                    <td><input type="text"  name="name" th:value="${updateProduct.name}"/></td>
+                </tr>
+
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;填写新简介： &nbsp;</td>
+                    <td><input type="text" name="description" th:value="${updateProduct.description}"/></td>
+                </tr>
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;填写新价格： &nbsp;</td>
+                    <td><input type="text"  name="price" th:value="${updateProduct.price}"/></td>
+                </tr>
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;填写新数量： &nbsp;</td>
+                    <td><input type="text"  name="stock" th:value="${updateProduct.stock}"/></td>
+                </tr>
+                <input type="hidden" name="fileName" th:value="${updateProduct.fileName}">
+                <input type="hidden" name="categoryleveloneId" th:value="${updateProduct.categoryleveloneId}">
+                <input type="hidden" name="categoryleveltwoId" th:value="${updateProduct.categoryleveltwoId}">
+                <input type="hidden" name="categorylevelthreeId" th:value="${updateProduct.categorylevelthreeId}">
+                <input type="hidden" name="id" th:value="${updateProduct.id}">
+                <tr height="60">
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="修改此产品" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

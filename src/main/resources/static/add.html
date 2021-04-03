@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增书籍</title>
+    <link rel="shortcut icon" href="#">
+    <th:block th:include="layCommon.html :: source"></th:block>
+</head>
+<body>
+<th:block th:include="layCommon.html :: heard"></th:block>
+
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 80px;">
+        <h1><li th:text="'一级：'+${one.name}"></li></h1>
+        <h2><li th:text="'二级：'+${two.name}"></li></h2>
+        <h3><li th:text="'三级：'+${three.name}"></li></h3>
+        <form  action="/all/addBook"  method="post" enctype="multipart/form-data">
+            <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>新产品名称 &nbsp;</td>
+                    <td><input type="text"  name="name" required/></td>
+                </tr>
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>新产品图片 &nbsp;</td>
+                    <td><input type="file"  name="img" required/></td>
+                </tr>
+
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;新产品简介 &nbsp;</td>
+                    <td><input type="text" name="description" required/></td>
+                </tr>
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;新产品价格 &nbsp;</td>
+                    <td><input type="text"  name="price" required/></td>
+                </tr>
+                <tr height="50">
+                    <td align="right"><font color="#ff4e00"></font>&nbsp;新产品数量 &nbsp;</td>
+                    <td><input type="text"  name="stock" required/></td>
+                </tr>
+                <input type="hidden" name="categoryleveloneId" th:value="${one.id}">
+                <input type="hidden" name="categoryleveltwoId" th:value="${two.id}">
+                <input type="hidden" name="categorylevelthreeId" th:value="${three.id}">
+                <input type="hidden"  name="filename" />
+                <tr height="60">
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="添加此产品" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

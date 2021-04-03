@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员首页</title>
+    <link rel="shortcut icon" href="#">
+    <th:block th:include="layCommon.html :: source"></th:block>
+</head>
+<body>
+    <th:block th:include="layCommon.html :: heard"></th:block>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 80px;">
+            <div class="m_right" id="content">
+                <p></p>
+                <p></p>
+                <table border="0" class="order_tab"
+                       style="width: 930px; text-align: center; margin-bottom: 30px;"
+                       cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <div>
+                        <td colspan="4">
+
+                            <table border="0" class="order_tab"
+                                   style="width: 930px; text-align: center; margin-bottom: 30px;"
+                                   cellspacing="0" cellpadding="0" th:each="list:${productList}">
+                                <tbody>
+                                <tr>
+                                    <td width="10%" >商品名称</td>
+                                    <td width="20%" >商品图片</td>
+                                    <td width="15%" >简介</td>
+                                    <td width="15%" >数量</td>
+                                    <td width="15%" >单价</td>
+                                </tr>
+                                <tr>
+                                    <td th:text="${list.name}">商品</td>
+                                    <td>
+                                        <img th:src="'/images/'+${list.fileName}" width="50"
+                                             height="50">
+                                    </td>
+                                    <td th:text="${list.description}">1</td>
+                                    <td th:text="${list.stock}">6000</td>
+                                    <td th:text="'￥'+${list.price}">10000</td>
+                                    <td th:if="${list.state} == 0">上架中</td>
+                                    <td th:if="${list.state} == 1">已下架</td>
+
+                                    <input type="hidden" class="add" th:value="${list.id}"/>
+                                    <td><a href="javascript:void(0);" onclick="addAgain(this);" class="again" th:if="${list.state} == 1">重新上架</a></td>
+                                        <script>
+                                            function addAgain(obj){
+                                                var index = $(".again").index(obj);
+                                                var id = parseInt($(".add").eq(index).val());
+                                                if (confirm("是否确认重新上架")){
+                                                    window.location.href = "/all/addAgain/"+id;
+                                                }
+                                            }
+                                        </script>
+                                    <td ><a th:href="'/all/update/'+${list.id}" th:if="${list.state} == 0">修改</a></td>
+                                    <input type="hidden" class="aaaa" th:value="${list.id}"/>
+                                    <td><a href="javascript:void(0);" onclick="removeProduct(this);" class="delete" th:if="${list.state} == 0">下架</a></td>
+                                        <script>
+                                            function removeProduct(obj){
+                                                var index = $(".delete").index(obj);
+                                                var id = parseInt($(".aaaa").eq(index).val());
+                                                if (confirm("是否确认下架")){
+                                                    window.location.href = "/all/delete/"+id;
+                                                }
+                                            }
+                                        </script>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
